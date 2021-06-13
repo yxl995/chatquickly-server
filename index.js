@@ -22,12 +22,12 @@ const getToken = (appId, appSign, userID, minute) => {
     let time = expiredTime(minute)
     let appSign32 = appSign.replace(/0x/g, '').replace(/,/g, '').substring(0, 32)
     if (appSign32.length < 32) return null
-    let sourece = md5(appId + appSign32 + userID + nonce + time)
+    let source = md5(appId + appSign32 + userID + nonce + time)
     let jsonStr = JSON.stringify({
         'ver': 1,
         'expired': time,
         'nonce': nonce,
-        'hash': sourece
+        'hash': source
     })
     return Buffer.from(jsonStr).toString('base64')
 }
